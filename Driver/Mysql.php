@@ -15,27 +15,21 @@ class Mysql{
         }
         return $retorno;
     }
-    public function create($tablenames, $path){
-        if ($tablenames =='ALLTABLES')
-            $theTables = $this->listTable();
-        else
-            $theTables = explode(',', $tablenames);
-        foreach ($theTables as $table) {
-        $stmt = $this->objectData->query("show fields from {$table}");
-        $dados = $stmt->fetchAll();
-        $file = fopen($path."{$table}.php", "w");
-        fwrite($file, "<?php \nClass {$table}{\n");
-        foreach ($dados as $data){
-            fwrite($file, "    /**\n    @fieldname ;\n    */\n");
-            fwrite($file, "    public \${$data['Field']};\n");
+    public function create($tablename){
+        $stmt = $this->objectData->query("show fields from {$tablename}");
+        $fields = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $infoFields = Array();
+        $infoFields[0] = Array();
+        foreach ($fields as $f){
+            $infoFields[ $f['Field'] ] =new \StdClass();
+            $field = $infoFields[ $f['Field'] ];
+            $field->name        = $f['Field'];
+            $field->type        = $f['Type'];
+            $field->acceptnull  = ($f['Null']=="YES")?"1":"0";
+            $field->pk  = ($f['Key']=='PRI')?true:false;
+            if($field->pk)
+                array_push($infoFields[0], $field->name);
         }
-        fwrite($file, "\n}\n?>");
-        }
-    }
-    public function MakeAllVO($path){
-        $tbls = $this->listTable();
-        foreach ($tbls as $tbl){
-            $this->MakeVO($tbl, $path);
-        }
+        return $infoFields;
     }
 }
