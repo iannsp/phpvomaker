@@ -1,20 +1,20 @@
 To use the vomaker you need inform some parameters in command line, like above
 
 dsn
-	at this time you just can use mysql dsn's
+    at this time you just can use mysql dsn's
 login
-	you database login
+    you database login
 password
-	you databaase password
+    you databaase password
 action
-	you can request for
-		'listtbl' 	:  list all tables in you database for support your choice to generate vo.
-		'*'			: it inform for vomaker you want create VO's for all tables
-		'tblname' 	: you just request a vo for one table or more (comma separated)
-		
+    you can request for
+        'listtbl'     :  list all tables in you database for support your choice to generate vo.
+        '*'            : it inform for vomaker you want create VO's for all tables
+        'tblname'     : you just request a vo for one table or more (comma separated)
+        
 outputfolder
-		where your vo class files will be save.(add the / in the path)
-		
+        where your vo class files will be save.(add the / in the path)
+        
 samples:
-	connect to dbtest with user utest and password ptest and create vo's for all tables in outputfolder vos
-	php appvomaker.php 'mysql:host=127.0.0.1;dbname=dbteste' 'utest' 'ptest' '*' 'vos/'
+    connect to dbtest with user utest and password ptest and create vo's for all tables in outputfolder vos
+    php appvomaker.php 'mysql:host=127.0.0.1;dbname=dbteste' 'utest' 'ptest' '*' 'vos/'
