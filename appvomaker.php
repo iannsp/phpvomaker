@@ -38,8 +38,12 @@ if ( $argc==1 || $argv[1]=='help'){
     } 
     exit(1);
 }
+if (!in_array($argv[1], array('listtable','create', 'help') )){
+    $help = New \VoMaker\Help();
+    echo $help->help();
+    _exit("\n");
+}
 $cmd = processrequest($argv);
-var_dump($cmd);
 try{
     $pdo = New \PDO($cmd['dsn']);
     $voMaker = new \VoMaker\VoMaker($pdo, $cmd);
