@@ -17,6 +17,7 @@ class Help {
     --password:you databaase password
     [cmd] : listtable|create|help
     --table : the table list
+    --template : templatename
     action:you can request for
     listtable     :  list all tables in you database for support your choice to generate vo.
     create        :  create the Vo's
