@@ -1,20 +1,25 @@
 To use the vomaker you need inform some parameters in command line, like above
-
-dsn
-    at this time you just can use mysql dsn's
-login
-    you database login
-password
-    you databaase password
-action
-    you can request for
-        'listtbl'     :  list all tables in you database for support your choice to generate vo.
-        '*'            : it inform for vomaker you want create VO's for all tables
-        'tblname'     : you just request a vo for one table or more (comma separated)
-        
-outputfolder
-        where your vo class files will be save.(add the / in the path)
-        
-samples:
-    connect to dbtest with user utest and password ptest and create vo's for all tables in outputfolder vos
-    php appvomaker.php 'mysql:host=127.0.0.1;dbname=dbteste' 'utest' 'ptest' '*' 'vos/'
+phpvomaker [cmd] --dsn [dsn] --login [login] --password  [options]
+--dsn: at this time you just can use mysql dsn's
+--login: you database login
+--password:you databaase password
+[cmd] : listtable|create|help
+--table : the table list
+--template : templatename
+action:you can request for
+listtable     :  list all tables in you database for support your choice to generate vo.
+create        :  create the Vo's
+ help         :  show this or a especific help if use help [cmd]
+phpvomaker --help
+phpvomaker --help listtable\n
+examples:
+create vo of table tags with BlueSeed Template into actual directory
+./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables tags --template blueseed
+create Vo of All Tables in database using template 'vo' basic 
+./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables ALLTABLES --template vo
+create vo of table tags and tags2 with BlueSeed Template into actual directory
+./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables tags,tags2 --template blueseed
+create vo to all tables  with vo basic Template into actual directory
+./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables ALLTABLES --template vo
+create vo to all tables  with default Template(vo basic) into actual directory
+./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables ALLTABLES
