@@ -1,0 +1,12 @@
+<?php
+namespace \Application\Vo;
+/**
+ * @tableName [tablename]
+ * @indexName [index]
+ * @connectionName default
+ */
+class [voname]Vo extends \BlueSeed\ActiveRecord{
+/* fieldlist */
+[fields]
+/* fieldlist */
+}
