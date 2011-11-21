@@ -5,7 +5,7 @@ include 'bootstrap.php';
 function processrequest($dt){
     $dt = array_slice($dt, 1);
     $data = Array();
-    $data['cmd'] = array_shift($dt); 
+    $data['cmd'] = array_shift($dt);
     if (count($dt) % 2 !=0) {
         _exit("Wrong parameters format. please verify.\n");
     }
@@ -35,7 +35,7 @@ if ( $argc==1 || $argv[1]=='help'){
         echo $help->$_hmethod();
     } else{
         echo $help->help();
-    } 
+    }
     exit(1);
 }
 if (!in_array($argv[1], array('listtable','create', 'help') )){
@@ -66,6 +66,7 @@ switch($cmd['cmd']){
             }else if (!isset($cmd['output'])){
                 exit("Wrong parameters. Need the --output [directoryoutput]\n");
             }
+           echo "Creating the Table(s): {$cmd['tables']}\n";
           $voMaker->exec($cmd['tables'], $cmd['output']);
         break;
 }
