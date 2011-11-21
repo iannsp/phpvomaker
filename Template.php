@@ -21,6 +21,7 @@ class Template{
         $file = fopen($output."/".ucfirst($voname).".php", "w");
         fwrite($file, $template);
         fclose($file);
+        $this->txtfield = Array();
     }
     public function setIndex($indexname) {
         $this->indexName = $indexname;
