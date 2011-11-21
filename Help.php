@@ -27,7 +27,7 @@ class Help {
     examples:
     create vo of table tags with BlueSeed Template into actual directory
     ./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables tags --template blueseed
-    create Vo of All Tables in database using template 'vo' basic 
+    create Vo of All Tables in database using template 'vo' basic
     ./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables ALLTABLES --template vo
     create vo of table tags and tags2 with BlueSeed Template into actual directory
     ./appvomaker.php create --dsn 'mysql:host=127.0.0.1;dbname=test' --user root --password mysql --output ./ --tables tags,tags2 --template blueseed
