@@ -5,7 +5,7 @@ include 'bootstrap.php';
 function processrequest($dt){
     $dt = array_slice($dt, 1);
     $data = Array();
-    $data['cmd'] = array_shift($dt); 
+    $data['cmd'] = array_shift($dt);
     if (count($dt) % 2 !=0) {
         _exit("Wrong parameters format. please verify.\n");
     }
@@ -35,7 +35,7 @@ if ( $argc==1 || $argv[1]=='help'){
         echo $help->$_hmethod();
     } else{
         echo $help->help();
-    } 
+    }
     exit(1);
 }
 if (!in_array($argv[1], array('listtable','create', 'help') )){
@@ -45,7 +45,7 @@ if (!in_array($argv[1], array('listtable','create', 'help') )){
 }
 $cmd = processrequest($argv);
 try{
-    $pdo = New \PDO($cmd['dsn']);
+    $pdo = New \PDO($cmd['dsn'], $cmd['user'],$cmd['password']);
     $voMaker = new \VoMaker\VoMaker($pdo, $cmd);
 }catch(Exception $E){
     echo "Error in DSN:".$E->getMessage();
@@ -53,9 +53,10 @@ try{
 switch($cmd['cmd']){
     case 'listtable':
         $tbls =  $voMaker->exec();
-        for ($i=0; $i<count($tbls); $i+=3){
-            for($j=$i; $j < $i+3; $j++)
-                echo printf("%4d- %-20s",($i+$j+1), $tbls[$j] );
+        $tables = array_chunk($tbls,3);
+        foreach ($tables as $table){
+			foreach ($table as $t)
+                echo sprintf("%-40s",$t );
             echo "\n";
         }
         break;
