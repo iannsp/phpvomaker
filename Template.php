@@ -14,17 +14,31 @@ class Template{
     {
         $output = (is_null($output)?"./":$output);
         $template = $this->template;
+        $fname	  = str_replace('[tablename]',ucfirst($voname), $this->getFileNameTemplate());
         $template = str_replace('[fields]',implode("\n",$this->txtfield), $template);
         $template = str_replace('[voname]',ucfirst($voname), $template);
         $template = str_replace('[tablename]',$voname, $template);
         $template = str_replace('[index]',$this->indexName, $template);
-        $file = fopen($output."/".ucfirst($voname).".php", "w");
+        $file = fopen($output."/"."{$fname}.php", "w");
         fwrite($file, $template);
         fclose($file);
         $this->txtfield = Array();
     }
     public function setIndex($indexname) {
         $this->indexName = $indexname;
+    }
+    private function getFileNameTemplate(){
+        $template = $this->template;
+    	$filename = preg_match("/\/\*\*filename:{1,}.*\*\*\//", $template, $matches);
+        if(count($matches)){
+        	$matches = str_replace('*','',$matches[0]);
+			$matches = str_replace("/","",$matches);
+			$matches = explode(":", $matches);
+			if (count($matches)==2){
+				return $matches[1];
+			}
+			return "[tablename]";
+        }
     }
     public function addField(\StdClass $field)
     {
