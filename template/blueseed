@@ -1,5 +1,5 @@
 <?php
-namespace \Application\Vo;
+namespace Application\Vo;
 /**
  * @tableName [tablename]
  * @indexName [index]
