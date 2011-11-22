@@ -1,4 +1,5 @@
 <?php
+/**filename:[tablename]Vo**/
 class [voname]Vo{
 /* fieldlist */
 [fields]
