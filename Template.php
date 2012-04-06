@@ -14,15 +14,24 @@ class Template{
     {
         $output = (is_null($output)?"./":$output);
         $template = $this->template;
-        $fname	  = str_replace('[tablename]',ucfirst($voname), $this->getFileNameTemplate());
+        $sanitazed = str_replace('.','',$voname);
+        $fname	  = str_replace('[tablename]',$this->Sanitize($voname), $this->getFileNameTemplate());
         $template = str_replace('[fields]',implode("\n",$this->txtfield), $template);
-        $template = str_replace('[voname]',ucfirst($voname), $template);
+        $template = str_replace('[voname]',$this->Sanitize($voname), $template);
         $template = str_replace('[tablename]',$voname, $template);
         $template = str_replace('[index]',$this->indexName, $template);
         $file = fopen($output."/"."{$fname}.php", "w");
         fwrite($file, $template);
         fclose($file);
         $this->txtfield = Array();
+    }
+    private function Sanitize($name)
+    {
+        $newname = Array();
+        $parts = explode('.', $name);
+        foreach ($parts as $part)
+            array_push($newname, ucfirst($part));
+        return implode('',$newname);    
     }
     public function setIndex($indexname) {
         $this->indexName = $indexname;
