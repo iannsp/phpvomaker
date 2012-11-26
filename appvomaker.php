@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+include 'Help.php';
 include 'VoMaker.php';
 include 'bootstrap.php';
 function processrequest($dt){
